@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
+import { SubmitButton } from "@/components/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
@@ -78,9 +79,7 @@ export default async function ItemPage({ params }: { params: { id: string } }) {
                     <h1 className="text-2xl font-bold">{item.name}</h1>
                     <span className="text-md font-regular">{item.description}</span>
                     <form action={createOrder}>
-                        <Button className="bg-[#A22B2B] text-white hover:bg-[#E93A3A]">
-                            Realizar pedido
-                        </Button>
+                        <SubmitButton loadingContent={"Realizando pedido..."} className="bg-[#A22B2B] text-white hover:bg-[#E93A3A]">Realizar pedido</SubmitButton>
                     </form>
                 </main>
             </>

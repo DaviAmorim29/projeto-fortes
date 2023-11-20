@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
+import { SubmitButton } from "@/components/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { prisma } from "@/lib/prisma";
@@ -38,7 +39,7 @@ export default function CadastrarComidaPage() {
                 <Input name="description" placeholder="Descrição" type="text" />
                 <Input name="data" placeholder="Data da semana" type="date" />
                 <Input name="imagem" placeholder="Imagem" type='text' />
-                <Button className="bg-slate-300 hover:bg-slate-200" type="submit">Cadastrar</Button>
+                <SubmitButton>Cadastrar</SubmitButton>
             </form>
         </main>
         </>
