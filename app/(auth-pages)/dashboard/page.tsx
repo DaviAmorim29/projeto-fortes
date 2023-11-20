@@ -4,6 +4,7 @@ import { CardapioList } from "@/components/CardapioList";
 import { DayButton } from "@/components/DayButton";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
+import { NotificationIcon } from "@/components/NotificationIcon";
 import { Input } from "@/components/ui/input";
 import { prisma } from "@/lib/prisma";
 import { BellIcon, BellPlusIcon } from "lucide-react";
@@ -35,22 +36,16 @@ import { Suspense } from "react";
 // ]
 
 export default async function DashboardMainPage() {
-    const session = await getServerSession(authOptions)
-    if (!session) return null
-    const notifications = await prisma.notifications.findFirst({
-        where: {
-            user: {
-                email: session.user!.email
-            }
-        }
-    })
-    const listItems = await prisma.lunch.findMany({})
     return(
         <>
             <Header>
-                <a className="cursor-pointer" href="/dashboard/notificacoes">
-                    {notifications ? <BellIcon className="text-red-500" />  :<BellIcon />}
-                </a>
+                <Suspense fallback={
+                    <a aria-disabled className="text-gray-200 animate-pulse">
+                        <BellIcon />
+                    </a>
+                }
+                    ><NotificationIcon />
+                </Suspense>
                 <h1 className="text-2xl font-bold mx-auto">Cardápio</h1>
                 <LogoutButton />
             </Header>

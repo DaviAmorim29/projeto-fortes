@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
+import { ItemDetails } from "@/components/ItemDetails";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
@@ -7,62 +8,14 @@ import { ArrowLeftCircleIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-async function getItemData(id: string) {
-    const item = await prisma.lunch.findUnique({
-        where: {
-            id
-        }
-    })
-    return item
+// sleep
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// async function getItemData(id: string) {
-//     return {
-//         id: "123",
-//         name: "Arroz com feijão",
-//         description: "Arroz com feijão",
-//         date: new Date(),
-//         image: "https://static.tuasaude.com/media/article/ye/su/arroz-e-feijao_20656_l.jpg"
-//     }
-// }
-
 export default async function ItemPage({ params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions)
-    if (!session) return null
-    if (!session.user) return null
-    const item = await getItemData(params.id)
-    if (!item) return redirect("/dashboard")
-    const getUserById = await prisma.user.findUnique({
-        where: {
-            email: session.user.email!
-        }
-    })
-    if (!getUserById) return null
-    async function createOrder() {
-        "use server"
-        const order = await prisma.order.create({
-            data: {
-                items: {
-                    create: {
-                        lunchId: params.id
-                    }
-                },
-                qrCode: "123",
-                userId: getUserById!.id,
-                used: false
-            }
-        })
-        await prisma.notifications.create({
-            data: {
-                title: "Novo pedido",
-                body: `Novo pedido de ${item!.name}`,
-                userId: getUserById!.id,
-                pedidoId: order.id
-            }
-        })
-        redirect(`/dashboard/pedido/${order.id}`)
-    }
     return (
             <>
                 <Header>
@@ -73,14 +26,16 @@ export default async function ItemPage({ params }: { params: { id: string } }) {
                     <ArrowLeftCircleIcon  className="hidden"/>
                 </Header>
                 <main className="flex flex-col gap-2 mt-12">
-                    <div className="relative h-[300px] overflow-hidden bg-gray-100 rounded">
-                        <Image  className="rounded-lg" objectFit="cover" fill alt="Foto da comida" src={item.image!} />
-                    </div>
-                    <h1 className="text-2xl font-bold">{item.name}</h1>
-                    <span className="text-md font-regular">{item.description}</span>
-                    <form action={createOrder}>
-                        <SubmitButton loadingContent={"Realizando pedido..."} className="bg-[#A22B2B] text-white hover:bg-[#E93A3A]">Realizar pedido</SubmitButton>
-                    </form>
+                    <Suspense fallback={
+                        <>
+                            <div className="relative h-[300px] w-full overflow-hidden bg-gray-200 rounded animate-pulse"></div>
+                            <div className="text-2xl font-bold w-40 h-10 animate-pulse bg-gray-200 rounded"></div>
+                            <div className="text-md font-regular w-80 h-8 animate-pulse bg-gray-200 rounded"></div>
+                            <div className="w-32 h-10 bg-gray-200 animate-pulse rounded"></div>
+                        </>
+                    }>
+                        <ItemDetails itemId={params.id}  />
+                    </Suspense>
                 </main>
             </>
         )

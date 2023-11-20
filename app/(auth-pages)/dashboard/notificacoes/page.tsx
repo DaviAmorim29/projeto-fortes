@@ -2,9 +2,11 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
 import { NotifyItem } from "@/components/NotifyItem";
+import { NotifyList } from "@/components/NotifyList";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
+import { Suspense } from "react";
 
 const notifyItems = [
     {
@@ -23,17 +25,6 @@ const notifyItems = [
 ]
 
 export default async function NotificationPage() {
-    const session = await getServerSession(authOptions)
-    if (!session) {
-        return null
-    }
-    const notifyItems = await prisma.notifications.findMany({
-        where: {
-            user: {
-                email: session.user?.email
-            }
-        }
-    })
     return (
         <>
             <Header>
@@ -45,13 +36,13 @@ export default async function NotificationPage() {
             </Header>
             <main className="flex flex-col gap-2 items-center justify-center">
                 <div className="flex flex-col gap-4 mt-4 w-full">
-                    {notifyItems.map((item, index) => (
-                        <NotifyItem  key={index} notify={{
-                            title: item.title,
-                            description: item.body,
-                            pedidoId: item.pedidoId || undefined
-                        }} />
-                    ))}
+                    <Suspense fallback={
+                        Array.from({length: 5}).map((_, index) => (
+                            <div key={index} className="bg-gray-200 rounded animate-pulse w-full h-16"></div>
+                        ))
+                    }>
+                        <NotifyList />
+                    </Suspense>
                 </div>
             </main>
             {/* <footer className="mt-auto h-full">
