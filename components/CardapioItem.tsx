@@ -34,8 +34,8 @@ export function CardapioItem({item}: {item: ItemProps}) {
         <a href={`/dashboard/item/${item.id}`}>
             <div className="flex flex-row justify-between w-full hover:bg-gray-200 p-2 rounded transition-all cursor-pointer">
                 <div className="flex flex-row gap-2">
-                    <div className="w-24 h-full bg-gray-200 rounded">
-                        <Image className="overflow-hidden rounded" alt="Foto da comida" width={250} height={250} src={item.image} />    
+                    <div className="relative h-24 w-24 overflow-hidde bg-gray-100 rounded">
+                        <Image fill objectFit="cover" className="overflow-hidden rounded" alt="Foto da comida" src={item.image} />    
                     </div> 
                     <div className="flex flex-col gap-2">
                         <h1>{item.name}</h1>

@@ -17,8 +17,8 @@ export default function CadastrarComidaPage() {
         const dayOfWeek = new Date(data).getDay()
         await prisma.lunch.create({
             data: {
-                name: "Arroz com feijão",
-                description: "Arroz com feijão",
+                name,
+                description,
                 useDayOfWeek: dayOfWeek,
                 image: img
             }

@@ -3,7 +3,6 @@ import { Header } from "@/components/Header";
 import { QRCodeComponent } from "@/components/QRCode";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
-import QRCode from "qrcode.react";
 
 async function getPedidodata(id: string) {
     const getPedidoData = await prisma.order.findUnique({
