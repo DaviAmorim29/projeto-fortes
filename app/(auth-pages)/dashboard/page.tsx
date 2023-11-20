@@ -63,7 +63,7 @@ export default async function DashboardMainPage() {
                     <CardapioList />
                 </Suspense>
             </main>
-            <footer className="mt-auto h-full">
+            <footer className="mt-auto">
                 <div className="flex flex-row justify-around">
                     {Array.from({length: 5}).map((_, index) => (
                         <DayButton key={index} isActive={index === 0} />

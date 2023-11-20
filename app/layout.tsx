@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${inter.className} h-full w-full bg-primary min-h-screen px-8 py-4 flex flex-1 flex-col gap-2`}>{children}</body>
+      <body className={`${inter.className} h-screen w-full bg-primary min-h-screen px-2 md:px-8 py-4 flex flex-1 flex-col gap-2`}>{children}</body>
     </html>
   )
 }
