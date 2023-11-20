@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: fortes-container
+    environment:
+      MYSQL_ROOT_PASSWORD: fortes_password
+      MYSQL_DATABASE: fortes_database
+      MYSQL_USER: fortes_user
+      MYSQL_PASSWORD: fortes_password
+    ports:
+      - "7280:3306"
+    volumes:
+      - ./dados-mysql:/var/lib/mysql
+
+volumes:
+  dados-sql:
+    driver: local

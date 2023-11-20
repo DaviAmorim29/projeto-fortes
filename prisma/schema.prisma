@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -63,7 +63,7 @@ model Lunch {
   name String
   description String?
   image String?
-  useDayOfWeek Boolean @default(false)
+  useDayOfWeek Int @default(0)
   orderItems OrderItem[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -78,6 +78,7 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   items OrderItem[]
+  notifications Notifications[]
 }
 
 model OrderItem {
@@ -96,6 +97,8 @@ model Notifications {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   title String
   body String
+  pedidoId String?
+  order Order? @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
