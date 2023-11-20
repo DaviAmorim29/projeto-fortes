@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
 import { NotifyItem } from "@/components/NotifyItem";

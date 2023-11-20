@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { CardapioItem, ItemProps } from "@/components/CardapioItem";
 import { DayButton } from "@/components/DayButton";
 import { Header } from "@/components/Header";
