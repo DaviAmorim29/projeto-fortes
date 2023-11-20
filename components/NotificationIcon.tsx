@@ -3,10 +3,6 @@ import { prisma } from "@/lib/prisma"
 import { BellIcon } from "lucide-react"
 import { getServerSession } from "next-auth"
 
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function NotificationIcon() {
     const session = await getServerSession(authOptions)
     if (!session) return null

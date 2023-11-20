@@ -1,19 +1,12 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
 import { ItemDetails } from "@/components/ItemDetails";
-import { SubmitButton } from "@/components/SubmitButton";
-import { Button } from "@/components/ui/button";
-import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 // sleep
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function sleep(ms: number) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 export default async function ItemPage({ params }: { params: { id: string } }) {
     return (

@@ -14,10 +14,6 @@ async function getItemData(id: string) {
     return item
 }
 
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function ItemDetails({itemId}: { itemId: string}) {
     const session = await getServerSession(authOptions)
     if (!session) return null
@@ -30,7 +26,6 @@ export async function ItemDetails({itemId}: { itemId: string}) {
         }
     })
     if (!getUserById) return null
-    await sleep(2000)
     async function createOrder() {
         "use server"
         const order = await prisma.order.create({
