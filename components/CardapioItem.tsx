@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export type ItemProps = {
     id: string
@@ -31,7 +32,7 @@ function calcularDiferencaDeTempo(dataPostagem: Date): string {
 export function CardapioItem({item}: {item: ItemProps}) {
     const formattedDate = calcularDiferencaDeTempo(item.date)
     return (
-        <a href={`/dashboard/item/${item.id}`}>
+        <Link href={`/dashboard/item/${item.id}`}>
             <div className="flex flex-row justify-between w-full hover:bg-gray-200 p-2 rounded transition-all cursor-pointer">
                 <div className="flex flex-row gap-2">
                     <div className="relative w-14 h-14 lg:h-24 lg:w-24 overflow-hidden bg-gray-100 rounded">
@@ -44,6 +45,6 @@ export function CardapioItem({item}: {item: ItemProps}) {
                 </div>
                 <span className="text-xs text-gray-400">{formattedDate}</span>
             </div>
-        </a>
+        </Link>
     )
 }

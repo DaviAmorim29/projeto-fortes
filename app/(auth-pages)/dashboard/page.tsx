@@ -1,39 +1,12 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
-import { CardapioItem, ItemProps } from "@/components/CardapioItem";
 import { CardapioList } from "@/components/CardapioList";
-import { DayButton } from "@/components/DayButton";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
 import { NotificationIcon } from "@/components/NotificationIcon";
 import { Input } from "@/components/ui/input";
-import { prisma } from "@/lib/prisma";
-import { BellIcon, BellPlusIcon } from "lucide-react";
-import { getServerSession } from "next-auth";
+import { BellIcon } from "lucide-react";
 import { Suspense } from "react";
 
-// const listItems: ItemProps[] = [
-//     {
-//         id: "1",
-//         name: "Arroz com feijão",
-//         description: "Arroz com feijão",
-//         date: new Date(),
-//         image: "https://static.tuasaude.com/media/article/ye/su/arroz-e-feijao_20656_l.jpg"
-//     },
-//     {
-//         id: "1",
-//         name: "Arroz com feijão",
-//         description: "Arroz com feijão",
-//         date: new Date(),
-//         image: "https://static.tuasaude.com/media/article/ye/su/arroz-e-feijao_20656_l.jpg"
-//     },
-//     {
-//         id: "1",
-//         name: "Arroz com feijão",
-//         description: "Arroz com feijão",
-//         date: new Date(),
-//         image: "https://static.tuasaude.com/media/article/ye/su/arroz-e-feijao_20656_l.jpg"
-//     }
-// ]
 
 export default async function DashboardMainPage() {
     return(
@@ -63,14 +36,14 @@ export default async function DashboardMainPage() {
                     <CardapioList />
                 </Suspense>
             </main>
-            <footer className="mt-auto">
+            {/* <footer className="mt-auto">
                 <div className="flex flex-row justify-around">
                     {Array.from({length: 5}).map((_, index) => (
                         <DayButton key={index} isActive={index === 0} />
                     ))}
 
                 </div>
-            </footer>
+            </footer> */}
         </>
     )
 }

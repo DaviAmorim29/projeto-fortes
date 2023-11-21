@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { QRCodeComponent } from "@/components/QRCode";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
+import Link from "next/link";
 
 async function getPedidodata(id: string) {
     const getPedidoData = await prisma.order.findUnique({
@@ -61,9 +62,9 @@ export default async function PedidoConfirmedPage({ params }: { params: { id: st
     return (
         <>
             <Header>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                     <ArrowLeftCircleIcon />
-                </a>
+                </Link>
                 <h1 className="text-2xl font-bold mx-auto">Pedido confirmado</h1>
                 <ArrowLeftCircleIcon  className="hidden"/>
             </Header>

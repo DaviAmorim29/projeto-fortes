@@ -3,11 +3,6 @@ import { ItemDetails } from "@/components/ItemDetails";
 import { ArrowLeftCircleIcon } from "lucide-react";
 import { Suspense } from "react";
 
-// sleep
-// function sleep(ms: number) {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
-
 export default async function ItemPage({ params }: { params: { id: string } }) {
     return (
             <>

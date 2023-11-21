@@ -1,36 +1,17 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
-import { NotifyItem } from "@/components/NotifyItem";
 import { NotifyList } from "@/components/NotifyList";
-import { prisma } from "@/lib/prisma";
 import { ArrowLeftCircleIcon } from "lucide-react";
-import { getServerSession } from "next-auth";
+import Link from "next/link";
 import { Suspense } from "react";
-
-const notifyItems = [
-    {
-        title: "Novo pedido",
-        description: "Foi adicionado um novo pedido de marmita no seu perfil, clique aqui para acessar o pedido com o QR CODE",
-        pedidoId: "123321312"
-    },
-    {
-        title: "Novo pedido",
-        description: "Foi adicionado um novo pedido de marmita no seu perfil, clique aqui para acessar o pedido com o QR CODE",
-    },
-    {
-        title: "Novo pedido",
-        description: "Foi adicionado um novo pedido de marmita no seu perfil, clique aqui para acessar o pedido com o QR CODE",
-    }
-]
 
 export default async function NotificationPage() {
     return (
         <>
             <Header>
-                <a href="/dashboard">
+                <Link href="/dashboard">
                     <ArrowLeftCircleIcon />
-                </a>
+                </Link>
                 <h1 className="text-2xl font-bold mx-auto">Notificações</h1>
                 <LogoutButton />
             </Header>

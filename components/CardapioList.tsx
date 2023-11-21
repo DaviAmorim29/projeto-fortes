@@ -1,14 +1,9 @@
 import { prisma } from "@/lib/prisma"
 import { CardapioItem } from "./CardapioItem"
-
-// sleep function
-// function sleep(ms: number) {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
+import { Lunch, Prisma } from "@prisma/client"
 
 export async function CardapioList() {
-    // await sleep(2000)
-    const listItems = await prisma.lunch.findMany()
+    const listItems = await prisma.$queryRaw`SELECT * FROM "Lunch"` as Lunch[]
     return (
         <div className="flex flex-col gap-4 mt-4 w-full">
             {listItems.map((item, index) => (

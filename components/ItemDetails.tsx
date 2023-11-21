@@ -4,14 +4,11 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { redirect } from "next/navigation";
+import { Lunch, Prisma } from "@prisma/client";
 
 async function getItemData(id: string) {
-    const item = await prisma.lunch.findUnique({
-        where: {
-            id
-        }
-    })
-    return item
+    const item = await prisma.$queryRaw`SELECT * FROM "Lunch" WHERE "id" = ${id} LIMIT 1` as Lunch[]
+    return item[0] || null
 }
 
 export async function ItemDetails({itemId}: { itemId: string}) {
