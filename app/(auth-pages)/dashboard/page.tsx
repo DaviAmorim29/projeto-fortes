@@ -1,5 +1,5 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
 import { CardapioList } from "@/components/CardapioList";
+import { DayButton } from "@/components/DayButton";
 import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
 import { NotificationIcon } from "@/components/NotificationIcon";
@@ -36,14 +36,14 @@ export default async function DashboardMainPage() {
                     <CardapioList />
                 </Suspense>
             </main>
-            {/* <footer className="mt-auto">
+            <footer className="mt-auto">
                 <div className="flex flex-row justify-around">
                     {Array.from({length: 5}).map((_, index) => (
-                        <DayButton key={index} isActive={index === 0} />
+                        <DayButton key={index} isActive={index === 0} day={index} />
                     ))}
 
                 </div>
-            </footer> */}
+            </footer>
         </>
     )
 }
